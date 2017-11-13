@@ -2,6 +2,8 @@ package edu.luc.cs271.myhashmap;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
@@ -18,6 +20,7 @@ public class TestMyHashMap {
   public void setUp() {
     // TODO create the SUT instance
     fixture = new MyHashMap<>();
+    this.fixture=fixture;
   }
 
   @After
@@ -29,6 +32,7 @@ public class TestMyHashMap {
   @Test
   public void testEmpty() {
     // TODO verify that the SUT initially returns an empty map
+
     assertTrue(fixture.isEmpty());
     assertEquals(0, fixture.size());
     assertEquals(0, fixture.keySet().size());
@@ -39,13 +43,24 @@ public class TestMyHashMap {
   @Test
   public void testNonEmpty() {
     // TODO run the SUT on a specific String iterator with some repeated words,
+    Iterator it = Arrays.asList("hello", "world", "what", "up").iterator();
+
+      // TODO for each word in the iterator, update the corresponding frequency in the map
+      // HINT to do this without a conditional, use the getOrDefault method
+      int count = 0;
+      while (it.hasNext()) {
+          fixture.put((String) it.next(), count + 1);
+        }
+
+
+//    fixture.putAll((Map<? extends String, ? extends Integer>) it);
     // then use assertions to verify the correct counts
     // do this for at least two words in the iterator and two not in the iterator
     assertNull(fixture.put("hello", 3));
     assertNull(fixture.put("world", 4));
     assertNull(fixture.put("what", 5));
     assertNull(fixture.put("up", 6));
-    assertEquals(Integer.valueOf(6), fixture.put("up", 4));
+//    assertEquals(Integer.valueOf(6), fixture.put("up", 4));
     assertFalse(fixture.isEmpty());
     assertEquals(4, fixture.size());
     assertEquals(4, fixture.keySet().size());
