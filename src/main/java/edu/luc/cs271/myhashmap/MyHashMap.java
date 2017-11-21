@@ -33,9 +33,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public int size() {
     // TODO add the sizes of all the chains
-//    int result = table.size()%DEFAULT_TABLE_SIZE;
     int result = numKeys;
-
     return result;
   }
 
@@ -139,7 +137,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
 //      Map.Entry entry = (Entry) it.next();
       list.add((Entry<K, V>) it.next());
     }
-
     table.add(list);
     }
 
@@ -162,7 +159,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
         result.add(entry.getKey());
       }
     }
-
     return Collections.unmodifiableSet(result);
   }
 
@@ -178,7 +174,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
         result.add(entry.getValue());
       }
     }
-
     return Collections.unmodifiableCollection(result);
   }
 
@@ -194,15 +189,14 @@ public class MyHashMap<K, V> implements Map<K, V> {
         result.add(entry);
       }
     }
-
-
     return Collections.unmodifiableSet(result);
   }
 
   @Override
   public String toString() {
     // TODO return the string representation of the underlying table
-    return ""+ table.toString();
+    return ""+ table;
+//    return ""+ table.toString();
   }
 
   public boolean equals(final Object that) {
