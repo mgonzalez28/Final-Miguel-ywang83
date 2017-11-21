@@ -43,15 +43,9 @@ public class TestMyHashMap {
   @Test
   public void testNonEmpty() {
     // TODO run the SUT on a specific String iterator with some repeated words,
-    Iterator it = Arrays.asList("hello", "world", "hello", "what", "up").iterator();
 
       // TODO for each word in the iterator, update the corresponding frequency in the map
       // HINT to do this without a conditional, use the getOrDefault method
-//      int count = 0;
-//      while (it.hasNext()) {
-//          fixture.put((String) it.next(), count + 1);
-//        }
-
 
     // then use assertions to verify the correct counts
     // do this for at least two words in the iterator and two not in the iterator
