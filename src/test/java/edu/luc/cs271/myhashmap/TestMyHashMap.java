@@ -2,8 +2,6 @@ package edu.luc.cs271.myhashmap;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +18,7 @@ public class TestMyHashMap {
   public void setUp() {
     // TODO create the SUT instance
     fixture = new MyHashMap<>();
-    this.fixture=fixture;
+    this.fixture = fixture;
   }
 
   @After
@@ -44,8 +42,8 @@ public class TestMyHashMap {
   public void testNonEmpty() {
     // TODO run the SUT on a specific String iterator with some repeated words,
 
-      // TODO for each word in the iterator, update the corresponding frequency in the map
-      // HINT to do this without a conditional, use the getOrDefault method
+    // TODO for each word in the iterator, update the corresponding frequency in the map
+    // HINT to do this without a conditional, use the getOrDefault method
 
     // then use assertions to verify the correct counts
     // do this for at least two words in the iterator and two not in the iterator

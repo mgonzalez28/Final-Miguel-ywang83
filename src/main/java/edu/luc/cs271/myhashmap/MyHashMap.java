@@ -2,7 +2,6 @@ package edu.luc.cs271.myhashmap;
 
 import java.util.*;
 
-
 /**
  * A generic HashMap custom implementation using chaining. Concretely, the table is an ArrayList of
  * chains represented as LinkedLists.
@@ -82,10 +81,10 @@ public class MyHashMap<K, V> implements Map<K, V> {
     }
     while (iter.hasNext()) {
       final Entry<K, V> entry = iter.next();
-//    for(Entry<K, V> entry : table.get(index)) {
+      //    for(Entry<K, V> entry : table.get(index)) {
       if (entry.getKey().equals(key)) {
         final V value = entry.getValue();
-//        return entry.getValue();
+        //        return entry.getValue();
         return value;
       }
     }
@@ -98,7 +97,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
     final int index = calculateIndex(key);
 
     final Iterator<Entry<K, V>> iter = table.get(index).iterator();
-//    for (Entry<K, V> entry : table.get(index)) {
+    //    for (Entry<K, V> entry : table.get(index)) {
     while (iter.hasNext()) {
       final Entry<K, V> entry = iter.next();
       if (entry.getKey().equals(key)) {
@@ -134,17 +133,17 @@ public class MyHashMap<K, V> implements Map<K, V> {
     List<Entry<K, V>> list = new LinkedList<>();
     Iterator it = mySet.iterator();
     while (it.hasNext()) {
-//      Map.Entry entry = (Entry) it.next();
+      //      Map.Entry entry = (Entry) it.next();
       list.add((Entry<K, V>) it.next());
     }
     table.add(list);
-    }
+  }
 
   @Override
   public void clear() {
     // TODO clear each chain
     table.clear();
-    numKeys=0;
+    numKeys = 0;
   }
 
   /** The resulting keySet is not "backed" by the Map, so we keep it unmodifiable. */
@@ -195,8 +194,8 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public String toString() {
     // TODO return the string representation of the underlying table
-    return ""+ table;
-//    return ""+ table.toString();
+    return "" + table;
+    //    return ""+ table.toString();
   }
 
   public boolean equals(final Object that) {
@@ -214,6 +213,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
     // positive remainder (as opposed to %)
     // required in case hashCode is negative!
     return Math.floorMod(key.hashCode(), table.size());
-//    return key.hashCode()%table.size();
+    //    return key.hashCode()%table.size();
   }
 }
