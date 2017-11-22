@@ -214,5 +214,6 @@ public class MyHashMap<K, V> implements Map<K, V> {
     // positive remainder (as opposed to %)
     // required in case hashCode is negative!
     return Math.floorMod(key.hashCode(), table.size());
+//    return key.hashCode()%table.size();
   }
 }
