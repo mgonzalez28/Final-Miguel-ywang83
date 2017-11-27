@@ -25,7 +25,6 @@ public class gameControl extends Panel implements Runnable {
         snake.add(new Point(100, 100));
         snake.add(new Point(100, 115));
         snake.add(new Point(100, 130));
-        g.fillRect(0, 0, 10, 10);
 }
 
     public void Draw(Graphics g) {
