@@ -1,32 +1,64 @@
 package finalproject;
 
-
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
-import java.util.Random;
 
-
-public class gameControl extends Panel {
-
+public class gameControl extends Panel implements Runnable {
     private LinkedList<Point> snake;
     private Point apple;
 
-    int appleX = 200;
-    int appleY = 200;
+    private final int pointWidth = 15;
+    private final int pointHeight = 15;
 
-    int snakeX = 300;
+    private Graphics globalGraphics;
+    private Thread runThread;
 
-    int pointWidth = 20;
-    int pointHeight = 20;
+    public void paint(Graphics g) {
+        globalGraphics = g.create();
+        if (runThread == null) {
+            runThread = new Thread(this);
+            runThread.start();
+        }
 
-    public void paint(Graphics graphic){
+        snake = new LinkedList<Point>();
+        apple = new Point(200, 10);
+        snake.add(new Point(100, 100));
+        snake.add(new Point(100, 115));
+        snake.add(new Point(100, 130));
+        g.fillRect(0, 0, 10, 10);
+}
 
-        // create the apple
-        graphic.setColor(Color.yellow);
-        graphic.fillOval(appleX,appleY,pointWidth,pointHeight);
+    public void Draw(Graphics g) {
+        DrawSnake(g);
+        DrawApple(g);
+    }
+
+    public void DrawSnake(Graphics g) {
+
+        for (Point p : snake) {
+            g.setColor(Color.GREEN);
+            g.fillRect(p.x, p.y, pointWidth, pointHeight);
+            g.setColor(Color.black);
+            g.drawRect(p.x, p.y, pointWidth, pointHeight);
+        }
+    }
+
+    public void DrawApple(Graphics g) {
+        g.setColor(Color.yellow);
+        g.fillOval(apple.x, apple.y, pointWidth, pointHeight);
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            Draw(globalGraphics);
+
+            try {
+                Thread.currentThread();
+                Thread.sleep(100);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
