@@ -1,9 +1,11 @@
 package finalproject;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 
-public class gameControl extends Panel implements Runnable {
+public class gameControl extends Panel implements Runnable, KeyListener{
     private LinkedList<Point> snake;
     private Point apple;
 
@@ -13,6 +15,8 @@ public class gameControl extends Panel implements Runnable {
     private Graphics globalGraphics;
     private Thread runThread;
 
+    private int direction = Direction.noDirection;
+
     public void paint(Graphics g) {
         globalGraphics = g.create();
         if (runThread == null) {
@@ -20,14 +24,17 @@ public class gameControl extends Panel implements Runnable {
             runThread.start();
         }
 
-        snake = new LinkedList<Point>();
+        snake = new LinkedList<>();
         apple = new Point(200, 10);
         snake.add(new Point(100, 100));
         snake.add(new Point(100, 115));
         snake.add(new Point(100, 130));
-}
+
+        this.addKeyListener(this);
+    }
 
     public void Draw(Graphics g) {
+        g.clearRect(0,0,600,480);
         DrawSnake(g);
         DrawApple(g);
     }
@@ -50,14 +57,66 @@ public class gameControl extends Panel implements Runnable {
     @Override
     public void run() {
         while (true) {
+            move();
             Draw(globalGraphics);
 
             try {
                 Thread.currentThread();
-                Thread.sleep(100);
+                Thread.sleep(150);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public void move() {
+        Point head = snake.peekFirst();
+        Point newPoint = head;
+        switch (direction) {
+            case Direction.up:
+                newPoint = new Point(head.x, head.y - 15);
+                break;
+            case Direction.down:
+                newPoint = new Point(head.x, head.y + 15);
+                break;
+            case Direction.left:
+                newPoint = new Point(head.x - 15, head.y);
+                break;
+            case Direction.right:
+                newPoint = new Point(head.x + 15, head.y);
+                break;
+        }
+        snake.remove(snake.peekLast());
+        snake.push(newPoint);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_UP:
+                direction = Direction.up;
+                break;
+            case KeyEvent.VK_DOWN:
+                direction = Direction.down;
+                break;
+            case KeyEvent.VK_LEFT:
+                direction = Direction.left;
+                break;
+            case KeyEvent.VK_RIGHT:
+                direction = Direction.right;
+                break;
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
