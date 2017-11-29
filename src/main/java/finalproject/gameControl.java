@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class gameControl extends Panel implements Runnable, KeyListener{
     private LinkedList<Point> snake;
@@ -25,10 +26,11 @@ public class gameControl extends Panel implements Runnable, KeyListener{
         }
 
         snake = new LinkedList<>();
-        apple = new Point(200, 10);
+        apple = new Point();
         snake.add(new Point(100, 100));
         snake.add(new Point(100, 115));
         snake.add(new Point(100, 130));
+        placeApple();
 
         this.addKeyListener(this);
     }
@@ -54,6 +56,19 @@ public class gameControl extends Panel implements Runnable, KeyListener{
         g.fillOval(apple.x, apple.y, pointWidth, pointHeight);
     }
 
+    public void placeApple(){
+        Random ran = new Random();
+        int randomX = ran.nextInt(600);
+        int randomY = ran.nextInt(480);
+        Point randomPoint = new Point(randomX,randomY);
+        while ((snake.peekFirst()).equals(randomPoint)){
+            randomX = ran.nextInt(600);
+            randomY = ran.nextInt(480);
+            randomPoint = new Point(randomX,randomY);
+        }
+        apple = randomPoint;
+    }
+
     @Override
     public void run() {
         while (true) {
@@ -62,7 +77,7 @@ public class gameControl extends Panel implements Runnable, KeyListener{
 
             try {
                 Thread.currentThread();
-                Thread.sleep(150);
+                Thread.sleep(200);
             } catch (Exception e) {
                 e.printStackTrace();
             }
